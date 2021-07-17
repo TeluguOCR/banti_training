@@ -9,21 +9,20 @@ import numpy as np
 from PIL import Image as im
 
 
-def tile4(t3, margin_color=.1, margin_width=1):
+def tile4(t3, margin_color=64, margin_width=1):
+    t3 = 255*(1-t3.astype("uint8"))
     n_images = t3.shape[0]
     w = n_images // int(np.sqrt(n_images))
     h = ceil(float(n_images) / w)
 
-    pad_axes = (0, h * w - n_images), (0, 1), (0, 1)
+    pad_axes = (0, h*w-n_images), (0, 1), (0, 1)
     pad_width = (margin_width * np.array(pad_axes)).tolist()
-    pad_fill = (margin_color * np.array(pad_axes)).tolist()
-    t3 = np.pad(t3, pad_width, 'constant', constant_values=pad_fill)
-
-    t2 = np.vstack([np.hstack([t3[i * w + j] for j in range(w)])
+    t3 = np.pad(t3, pad_width, 'constant', constant_values=margin_color)
+    t2 = np.vstack([
+            np.hstack([t3[i * w + j] 
+                for j in range(w)])
                     for i in range(h)])
     t2 = t2[:-margin_width, :-margin_width]
-    t2 = (255 * t2).astype("uint8")
-
     return t2
 
 
@@ -32,6 +31,13 @@ def read_json_bz2(path2data):
     bz2_fp = bz2.BZ2File(path2data, 'r')
     data = np.array(json.loads(bz2_fp.read().decode('utf-8')))
     bz2_fp.close()
+    return data
+
+
+def read_json(path2data):
+    print("Loading", path2data)
+    with open(path2data, 'r') as fp:
+        data = np.array(json.loads(fp.read()))
     return data
 
 
@@ -55,16 +61,23 @@ def main():
         labellings = ast.literal_eval(labels_fp.read())
     reverse_labels = dict((v, k) for k, v in labellings.items())
 
-    imgs = read_json_bz2(data_file_name)
-    print('avg brightness = ', imgs.mean())
     labels = read_json_bz2(labels_file_name)
-    dir_name = data_file_name.replace('.bz2', '/')
+    if data_file_name.endswith('.bz2'):
+        imgs = read_json_bz2(data_file_name)
+    elif data_file_name.endswith('.json'):
+        imgs = read_json(data_file_name)
+    print(f"Images\n\tMax: {imgs.max()} Mean:{imgs.mean()} Min:{imgs.min()} Shape:{imgs.shape}  dtype:{imgs.dtype}")
+
+    dir_name = data_file_name.replace('.bz2', '').replace('.json', '') + '.byclass/'
     if not os.path.exists(dir_name):
         os.makedirs(dir_name)
     namer = (dir_name + '{}.bmp').format
 
-    for l in range(max(labels)):
+    for l in range(max(labels)+1):
         indices = labels == l
+        if sum(indices) == 0:
+            print("{}) Skipping {} with 0 images".format(l, name))
+            continue
         name = namer(reverse_labels[l])
 
         imgs_l = imgs[indices]

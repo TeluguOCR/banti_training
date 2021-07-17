@@ -16,10 +16,14 @@ import theanet.neuralnet as nn
 ################################ HELPER FUNCTIONS ############################
 
 
-def read_json_bz2(path2data):
-    bz2_fp = bz2.BZ2File(path2data, 'r')
-    data = np.array(json.loads(bz2_fp.read().decode('utf-8')))
-    bz2_fp.close()
+def read_json_bz2(path2data, dtype=None):
+    if path2data.endswith('.bz2'):
+        bz2_fp = bz2.BZ2File(path2data, 'r')
+        data = np.array(json.loads(bz2_fp.read().decode('utf-8')), dtype=dtype)
+        bz2_fp.close()
+    elif path2data.endswith('.json'):
+        with open(path2data, "r") as jsonfp:
+            data = np.array(json.load(jsonfp), dtype=dtype)
     return data
 
 
@@ -94,7 +98,7 @@ if (not 'SEED' in tr_prms) or (tr_prms['SEED'] is None):
 out_file_head = os.path.basename(prms_file_name,).replace(
     os.path.splitext(prms_file_name)[1], "_{:06d}".format(tr_prms['SEED']))
 
-if sys.argv[-1] is '1':
+if sys.argv[-1] == '1':
     print("Printing output to {}.txt".format(out_file_head), file=sys.stderr)
     sys.stdout = WrapOut(True, out_file_head + '.txt')
 else:
@@ -116,7 +120,7 @@ print(nn.get_training_params_info(tr_prms))
 
 print("\nLoading the data ...")
 sys.stdout.forceflush()
-data_x = read_json_bz2(imgs_file_name)
+data_x = read_json_bz2(imgs_file_name, dtype=th.config.floatX)
 data_y = read_json_bz2(lbls_file_name)
 if data_x.ndim == 3:
     data_x = np.expand_dims(data_x, axis=1)
