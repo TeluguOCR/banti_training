@@ -1,0 +1,74 @@
+{
+"layers" : [
+       ('ElasticLayer', {
+           'translation'   :5,
+           'zoom'          :1.2,
+           'magnitude'     :60,
+           'sigma'         :15,
+           'pflip'         :0.03,
+           'angle'         :5,
+           'nearest'       :True,
+           'invert_image'  :False,
+           }),
+        ('ConvLayer', {
+            'num_maps'      :6,
+            'filter_sz'     :3,
+            'stride'        :1,
+            'actvn'         :"relu50",
+            'mode'          :"same",
+            'reg'           : {'L2':1, 'maxnorm':2.5},
+            }),
+        ('PoolLayer', {
+            'pool_sz'       :2,
+            }),
+        ('ConvLayer', {
+            'num_maps'      :18,
+            'filter_sz'     :3,
+            'stride'        :1,
+            'actvn'         :"relu30",
+            'mode'          :"same",
+            'reg'           : {'L2':1, 'maxnorm':2.5},
+            }),
+        ('PoolLayer', {
+            'pool_sz'       :2,
+            }),
+        ('ConvLayer', {
+            'num_maps'      :54,
+            'filter_sz'     :3,
+            'stride'        :1,
+            'actvn'         :"relu17",
+            'mode'          :"same",
+            'reg'           : {'L2':1, 'maxnorm':2.5},
+            }),
+        ('PoolLayer', {
+            'pool_sz'       :2,
+            }),
+        ('ConvLayer', {
+            'num_maps'      :162,
+            'filter_sz'     :3,
+            'stride'        :1,
+            'actvn'         :"relu10",
+            'mode'          :"same",
+            'reg'           : {'L2':1, 'maxnorm':2.5},
+            }),
+        ('PoolLayer', {
+            'pool_sz'       :2,
+            }),
+        ('SoftmaxLayer', {
+            'n_out'         :457,
+            'reg'			: {'L2':.1, 'maxnorm':2.5},
+            }),
+],
+
+"training_params" : {
+    #'SEED'  : 555555,
+    'BATCH_SZ'   :20,
+    'NUM_EPOCHS' : 11,
+    'TRAIN_ON_FRACTION' : .75,
+    'EPOCHS_TO_TEST' : 1,
+    'TEST_SAMP_SZ': 5000,
+
+    'INIT_LEARNING_RATE': .1,
+    'EPOCHS_TO_HALF_RATE':  1,
+},
+}

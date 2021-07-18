@@ -1,0 +1,84 @@
+{
+"layers" : [
+       ('ElasticLayer', {
+           'translation'   :5,
+           'zoom'          :1.2,
+           'magnitude'     :60,
+           'sigma'         :15,
+           'pflip'         :0.0,
+           'angle'         :5,
+           'nearest'       :True,
+           'invert_image'  :False,
+           }), # 96
+        ('ConvLayer', {
+            'num_maps'      :6,
+            'filter_sz'     :2,
+            'stride'        :1,
+            'actvn'         :"relu50",
+            'mode'          :"same",
+            'reg'           : {'maxnorm':2.5},
+            }),
+        ('PoolLayer', {
+            'pool_sz'       :2,
+            }), # 48
+        ('ConvLayer', {
+            'num_maps'      :12,
+            'filter_sz'     :2,
+            'stride'        :1,
+            'actvn'         :"relu20",
+            'mode'          :"same",
+            'reg'           : {'maxnorm':2.5},
+            }),
+        ('PoolLayer', {
+            'pool_sz'       :2,
+            }), # 24
+        ('ConvLayer', {
+            'num_maps'      :24,
+            'filter_sz'     :2,
+            'stride'        :1,
+            'actvn'         :"relu10",
+            'mode'          :"same",
+            'reg'           : {'maxnorm':2.5},
+            }),
+        ('PoolLayer', {
+            'pool_sz'       :2,
+            }), # 12
+        ('ConvLayer', {
+            'num_maps'      :48,
+            'filter_sz'     :2,
+            'stride'        :1,
+            'actvn'         :"relu05",
+            'mode'          :"same",
+            'reg'           : {'maxnorm':2.5},
+            }),
+        ('PoolLayer', {
+            'pool_sz'       :2,
+            }), #6
+        ('ConvLayer', {
+            'num_maps'      :96,
+            'filter_sz'     :2,
+            'stride'        :1,
+            'actvn'         :"relu02",
+            'mode'          :"same",
+            'reg'           : {'maxnorm':2.5},
+            }), 
+        ('PoolLayer', {
+            'pool_sz'       :2,
+            }), #3
+        ('SoftmaxLayer', {
+            'n_out'         :457,
+            'reg'           : {'maxnorm':2.5},
+            }),
+],
+
+"training_params" : {
+    'BATCH_SZ'   :20,
+    'NUM_EPOCHS' : 51,
+    'TRAIN_ON_FRACTION' : .75,
+    'EPOCHS_TO_TEST' : 1,
+    'TEST_SAMP_SZ': 5000,
+
+    'INIT_LEARNING_RATE': .1,
+    'EPOCHS_TO_HALF_RATE':  1,
+},
+}
