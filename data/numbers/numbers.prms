@@ -11,7 +11,7 @@
             'invert_image'  :True,
             }),
         ('ConvLayer', {
-            'num_maps'      :4,
+            'num_maps'      :7,
             'filter_sz'     :3,
             'stride'        :1,
             'actvn'         :"relu50",
@@ -20,7 +20,7 @@
             'pool_sz'       :2,
             }),
         ('ConvLayer', {
-            'num_maps'      :20,
+            'num_maps'      :21,
             'filter_sz'     :3,
             'stride'        :1,
             'actvn'         :"relu10",
@@ -29,7 +29,7 @@
             'pool_sz'       :2,
             }),
         ('HiddenLayer', {
-            'n_out'         :500,
+            'n_out'         :501,
             'pdrop'         :.5,
             'reg'           : {'L2':.001, 'maxnorm':0},
             }),
@@ -42,7 +42,7 @@
 "training_params" : {
     #'SEED' : 555555,
     'BATCH_SZ'   :20,
-    'NUM_EPOCHS' : 11,
+    'NUM_EPOCHS' : 51,
     'TRAIN_ON_FRACTION' : .75,
     'EPOCHS_TO_TEST' : 1,
     'TEST_SAMP_SZ': 1000,

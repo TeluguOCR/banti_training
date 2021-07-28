@@ -5,7 +5,6 @@ import sys
 import ast
 import bz2
 import json
-import glob
 import pickle
 import socket
 import traceback
@@ -230,29 +229,33 @@ def train(prms_file_name, out_to_file=True):
     if out_to_file:
         print(-1, end='', file=stdout_orig)
     do_test()
-    
-    for epoch in range(nEpochs):
-        total_cost = 0
 
-        for ibatch in range(nTrBatches):
-            output = training_fn(ibatch)
-            total_cost += output[0]
+    try:
+        for epoch in range(nEpochs):
+            total_cost = 0
 
-            if np.isnan(total_cost):
-                print(f"Epoch:{epoch} Iteration:{ibatch}")
-                print(net.get_wts_info(detailed=True))
-                raise ZeroDivisionError(f"Nan cost at Epoch:{epoch} Iteration:{ibatch}")
+            for ibatch in range(nTrBatches):
+                output = training_fn(ibatch)
+                total_cost += output[0]
 
-        if epoch % tr_prms['EPOCHS_TO_TEST'] == 0:
-            print(f"{net.get_epoch():3d} {total_cost:>8.2f}", end='    ')
-            if out_to_file:
-                print(epoch, end='', file=stdout_orig)
-            do_test()
-            if total_cost > 1e6:
-                print("Cost too high! Reduce init learning rate! Quitting!")
-                break
+                if np.isnan(total_cost):
+                    print(f"Epoch:{epoch} Iteration:{ibatch}")
+                    print(net.get_wts_info(detailed=True))
+                    raise ZeroDivisionError(f"Nan cost at Epoch:{epoch} Iteration:{ibatch}")
 
-        net.inc_epoch_set_rate()
+            if epoch % tr_prms['EPOCHS_TO_TEST'] == 0:
+                print(f"{net.get_epoch():3d} {total_cost:>8.2f}", end='    ')
+                if out_to_file:
+                    print(epoch, end='', file=stdout_orig)
+                do_test()
+                if total_cost > 1e6:
+                    print("Cost too high! Reduce init learning rate! Quitting!")
+                    break
+
+            net.inc_epoch_set_rate()
+
+    except KeyboardInterrupt:
+        print("Interupted at epoch", net.get_epoch(), file=stdout_orig)
 
     ########################################## Final Error Rates
     teerr, teerr2 = test_wrapper(test_fn_te(i) for i in range(nTeBatches))
@@ -262,16 +265,15 @@ def train(prms_file_name, out_to_file=True):
 
 
 def train_all(file_patterns):
-    for file_or_pattern in file_patterns:
-        for file_name in glob.glob(file_or_pattern):
-            print("################################  Processing: ", file_name)
-            try:
-                train(file_name, out_to_file=write_to_file)
-                print("Succesfully Done.")
-            except:
-                sys.stdout = stdout_orig
-                print("Unexpected error while processing ", file_name)
-                traceback.print_exc()
+    for file_name in file_patterns:
+        print("################################  Processing: ", file_name)
+        try:
+            train(file_name, out_to_file=write_to_file)
+            print("Succesfully Done.")
+        except:
+            sys.stdout = stdout_orig
+            print("Unexpected error while processing ", file_name)
+            traceback.print_exc()
 
 
 train_all(prms_file_names)

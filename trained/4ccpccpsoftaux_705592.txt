@@ -1,0 +1,269 @@
+Batch Command:  /usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py -f /root/.local/share/jupyter/runtime/kernel-586896eb-0c1e-46d0-9dba-ed54bc73749d.json
+Processing:  rel48/params48/4ccpccpsoftaux.prms
+Time   :2021-07-23 06:18:55
+Device : cuda (float32)
+Host   : 91e6be45a4d9
+
+ElasticLayer : 
+	translation : 	2
+	zoom : 	1.1
+	magnitude : 	60
+	sigma : 	15
+	pflip : 	0.03
+	angle : 	5
+	nearest : 	True
+	invert_image : 	False
+	img_sz : 	48
+ConvLayer : 
+	num_maps : 	6
+	filter_sz : 	3
+	stride : 	1
+	actvn : 	relu50
+	mode : 	same
+ConvLayer : 
+	num_maps : 	6
+	filter_sz : 	3
+	stride : 	1
+	actvn : 	relu50
+	mode : 	same
+PoolLayer : 
+	pool_sz : 	2
+ConvLayer : 
+	num_maps : 	18
+	filter_sz : 	3
+	stride : 	1
+	actvn : 	relu20
+	mode : 	same
+ConvLayer : 
+	num_maps : 	18
+	filter_sz : 	3
+	stride : 	1
+	actvn : 	relu20
+	mode : 	same
+PoolLayer : 
+	pool_sz : 	2
+ConvLayer : 
+	num_maps : 	54
+	filter_sz : 	3
+	stride : 	1
+	actvn : 	relu10
+	mode : 	same
+ConvLayer : 
+	num_maps : 	54
+	filter_sz : 	3
+	stride : 	1
+	actvn : 	relu10
+	mode : 	same
+PoolLayer : 
+	pool_sz : 	2
+ConvLayer : 
+	num_maps : 	162
+	filter_sz : 	3
+	stride : 	1
+	actvn : 	relu05
+	mode : 	same
+ConvLayer : 
+	num_maps : 	162
+	filter_sz : 	3
+	stride : 	1
+	actvn : 	relu05
+	mode : 	same
+PoolLayer : 
+	pool_sz : 	2
+SoftAuxLayer : 
+	n_aux : 	(5, 9)
+	aux_type : 	LocationInfo
+	n_out : 	457
+	reg : 	{'L2': 0.001, 'maxnorm': 0}
+Training Parameters:
+	BATCH_SZ : 	20
+	EPOCHS_TO_HALF_RATE : 	1
+	EPOCHS_TO_TEST : 	1
+	INIT_LEARNING_RATE : 	0.1
+	NUM_EPOCHS : 	101
+	SEED : 	705592
+	TEST_SAMP_SZ : 	5000
+	TRAIN_ON_FRACTION : 	0.75
+X (samples, dimensions): (73583, 1, 48, 48) 678140KB
+X (min, max) : 0.0 1.0
+Y (samples, dimensions): (73583,) 588KB
+Y (min, max) : 0 456
+
+Initializing the net ... 
+
+Train Layers
+	Elastic Maps:1 Size:48 Translation:2 Zoom:1.1 Mag:60 Sig:15 Noise:0.03 Angle:5 Invert:False Interpolation:Nearest
+	Conv Maps: 6 Filter:3 Stride:1 Mode:same Output:48 Act:relu50
+	  L1:0 L2:0 Momentum:0.95 Rate:1 Max Norm:0
+	Conv Maps: 6 Filter:3 Stride:1 Mode:same Output:48 Act:relu50
+	  L1:0 L2:0 Momentum:0.95 Rate:1 Max Norm:0
+	Pool Maps: 6 Pool_sz:2 Border:Keep Output:24
+	Conv Maps:18 Filter:3 Stride:1 Mode:same Output:24 Act:relu20
+	  L1:0 L2:0 Momentum:0.95 Rate:1 Max Norm:0
+	Conv Maps:18 Filter:3 Stride:1 Mode:same Output:24 Act:relu20
+	  L1:0 L2:0 Momentum:0.95 Rate:1 Max Norm:0
+	Pool Maps:18 Pool_sz:2 Border:Keep Output:12
+	Conv Maps:54 Filter:3 Stride:1 Mode:same Output:12 Act:relu10
+	  L1:0 L2:0 Momentum:0.95 Rate:1 Max Norm:0
+	Conv Maps:54 Filter:3 Stride:1 Mode:same Output:12 Act:relu10
+	  L1:0 L2:0 Momentum:0.95 Rate:1 Max Norm:0
+	Pool Maps:54 Pool_sz:2 Border:Keep Output: 6
+	Conv Maps:162 Filter:3 Stride:1 Mode:same Output: 6 Act:relu05
+	  L1:0 L2:0 Momentum:0.95 Rate:1 Max Norm:0
+	Conv Maps:162 Filter:3 Stride:1 Mode:same Output: 6 Act:relu05
+	  L1:0 L2:0 Momentum:0.95 Rate:1 Max Norm:0
+	Pool Maps:162 Pool_sz:2 Border:Keep Output: 3
+	SoftAux In:1458 Aux:(5, 9) Out:457
+	  L1:0 L2:0.001 Momentum:0.95 Max Norm:0 Rate:1
+Test Layers
+	Elastic Maps:1 Size:48 Translation:0 Zoom:1 Mag:0 Sig:1 Noise:0 Angle:0 Invert:False Interpolation:Nearest
+	Conv Maps: 6 Filter:3 Stride:1 Mode:same Output:48 Act:relu50
+	  L1:0 L2:0 Momentum:0.95 Rate:1 Max Norm:0
+	Conv Maps: 6 Filter:3 Stride:1 Mode:same Output:48 Act:relu50
+	  L1:0 L2:0 Momentum:0.95 Rate:1 Max Norm:0
+	Pool Maps: 6 Pool_sz:2 Border:Keep Output:24
+	Conv Maps:18 Filter:3 Stride:1 Mode:same Output:24 Act:relu20
+	  L1:0 L2:0 Momentum:0.95 Rate:1 Max Norm:0
+	Conv Maps:18 Filter:3 Stride:1 Mode:same Output:24 Act:relu20
+	  L1:0 L2:0 Momentum:0.95 Rate:1 Max Norm:0
+	Pool Maps:18 Pool_sz:2 Border:Keep Output:12
+	Conv Maps:54 Filter:3 Stride:1 Mode:same Output:12 Act:relu10
+	  L1:0 L2:0 Momentum:0.95 Rate:1 Max Norm:0
+	Conv Maps:54 Filter:3 Stride:1 Mode:same Output:12 Act:relu10
+	  L1:0 L2:0 Momentum:0.95 Rate:1 Max Norm:0
+	Pool Maps:54 Pool_sz:2 Border:Keep Output: 6
+	Conv Maps:162 Filter:3 Stride:1 Mode:same Output: 6 Act:relu05
+	  L1:0 L2:0 Momentum:0.95 Rate:1 Max Norm:0
+	Conv Maps:162 Filter:3 Stride:1 Mode:same Output: 6 Act:relu05
+	  L1:0 L2:0 Momentum:0.95 Rate:1 Max Norm:0
+	Pool Maps:162 Pool_sz:2 Border:Keep Output: 3
+	SoftAux In:1458 Aux:(5, 9) Out:457
+	  L1:0 L2:0 Momentum:0.95 Max Norm:0 Rate:1
+Params ; ConvW, Convb; ConvW, Convb; ; ConvW, Convb; ConvW, Convb; ; ConvW, Convb; ConvW, Convb; ; ConvW, Convb; ConvW, Convb; ; HidW, Hidb, Loc1W, Loc1b, Loc2W, Loc2b, SoftAuxCrossW, SoftAuxCrossb
+
+Layer 0:
+Layer 1: (6, 1, 3, 3) float32 ❲54❳ ❲-3.33e-01, -3.70e-02, 3.33e-01❳ (6,) float32 ❲6❳ ❲0.00e+00, 0.00e+00, 0.00e+00❳
+Layer 2: (6, 6, 3, 3) float32 ❲324❳ ❲-1.36e-01, 6.72e-03, 1.36e-01❳ (6,) float32 ❲6❳ ❲0.00e+00, 0.00e+00, 0.00e+00❳
+Layer 3:
+Layer 4: (18, 6, 3, 3) float32 ❲972❳ ❲-1.36e-01, 4.76e-03, 1.36e-01❳ (18,) float32 ❲18❳ ❲0.00e+00, 0.00e+00, 0.00e+00❳
+Layer 5: (18, 18, 3, 3) float32 ❲2916❳ ❲-7.86e-02, -1.13e-03, 7.86e-02❳ (18,) float32 ❲18❳ ❲0.00e+00, 0.00e+00, 0.00e+00❳
+Layer 6:
+Layer 7: (54, 18, 3, 3) float32 ❲8748❳ ❲-7.86e-02, -3.95e-04, 7.86e-02❳ (54,) float32 ❲54❳ ❲0.00e+00, 0.00e+00, 0.00e+00❳
+Layer 8: (54, 54, 3, 3) float32 ❲26244❳ ❲-4.54e-02, -1.66e-04, 4.54e-02❳ (54,) float32 ❲54❳ ❲0.00e+00, 0.00e+00, 0.00e+00❳
+Layer 9:
+Layer 10: (162, 54, 3, 3) float32 ❲78732❳ ❲-4.54e-02, -2.24e-04, 4.54e-02❳ (162,) float32 ❲162❳ ❲5.00e-01, 5.00e-01, 5.00e-01❳
+Layer 11: (162, 162, 3, 3) float32 ❲236196❳ ❲-2.62e-02, -3.90e-05, 2.62e-02❳ (162,) float32 ❲162❳ ❲5.00e-01, 5.00e-01, 5.00e-01❳
+Layer 12:
+Layer 13: (1458, 457) float32 ❲666306❳ ❲-3.96e-02, 1.63e-05, 3.96e-02❳ (457,) float32 ❲457❳ ❲0.00e+00, 0.00e+00, 0.00e+00❳ (2, 5) float32 ❲10❳ ❲-4.25e-01, 9.08e-02, 6.51e-01❳ (5,) float32 ❲5❳ ❲0.00e+00, 0.00e+00, 0.00e+00❳ (5, 9) float32 ❲45❳ ❲-4.57e-01, -7.36e-02, 3.63e-01❳ (9,) float32 ❲9❳ ❲5.00e-01, 5.00e-01, 5.00e-01❳ (9, 457) float32 ❲4113❳ ❲-8.01e-02, 1.16e-03, 8.02e-02❳ (457,) float32 ❲457❳ ❲0.00e+00, 0.00e+00, 0.00e+00❳
+
+Total Number of Weights : 1,026,068
+
+Compiling ... 
+Compiling training function...
+Compiling testing function... 
+Compiling testing function... 
+Training ...
+Epoch   Cost  Tr_Error Tr_P(MLE)    Te_Error Te_P(MLE)
+ -1 19148.74    99.94%  ( 0.21%)      99.80%  ( 0.22%)
+  0  9462.18    20.62%  (73.08%)      17.44%  (76.98%)
+  1  2527.14     7.04%  (90.04%)       6.44%  (90.43%)
+  2  1673.87     3.08%  (95.05%)       3.66%  (94.33%)
+  3  1288.15     2.12%  (96.48%)       2.86%  (95.80%)
+  4  1047.55     1.28%  (97.87%)       1.46%  (97.39%)
+  5   904.20     0.92%  (98.43%)       1.64%  (97.66%)
+  6   799.59     1.16%  (98.40%)       2.08%  (97.12%)
+  7   716.04     0.60%  (98.95%)       1.36%  (97.89%)
+  8   649.38     0.38%  (99.06%)       1.26%  (97.96%)
+  9   604.06     0.30%  (99.30%)       1.18%  (98.24%)
+ 10   564.99     0.68%  (98.95%)       1.32%  (98.18%)
+ 11   529.77     0.64%  (99.03%)       0.96%  (98.45%)
+ 12   502.12     0.50%  (99.22%)       0.94%  (98.60%)
+ 13   475.17     0.24%  (99.48%)       1.04%  (98.46%)
+ 14   447.61     0.62%  (99.10%)       0.98%  (98.53%)
+ 15   432.98     0.44%  (99.34%)       1.20%  (98.33%)
+ 16   422.36     0.16%  (99.55%)       0.76%  (98.78%)
+ 17   387.42     0.14%  (99.65%)       0.92%  (98.73%)
+ 18   384.78     0.20%  (99.60%)       0.86%  (98.72%)
+ 19   370.19     0.14%  (99.63%)       0.86%  (98.68%)
+ 20   356.66     0.08%  (99.77%)       0.54%  (98.97%)
+ 21   342.76     0.16%  (99.63%)       0.88%  (98.78%)
+ 22   343.58     0.34%  (99.50%)       0.70%  (98.89%)
+ 23   331.62     0.30%  (99.52%)       0.70%  (98.99%)
+ 24   316.04     0.26%  (99.59%)       0.88%  (98.84%)
+ 25   314.24     0.20%  (99.57%)       0.72%  (98.99%)
+ 26   301.44     0.10%  (99.77%)       0.46%  (99.21%)
+ 27   296.27     0.04%  (99.78%)       0.58%  (99.09%)
+ 28   294.23     0.26%  (99.64%)       0.86%  (98.85%)
+ 29   287.21     0.10%  (99.74%)       0.84%  (98.84%)
+ 30   272.16     0.08%  (99.78%)       0.52%  (99.13%)
+ 31   266.94     0.12%  (99.79%)       0.60%  (99.08%)
+ 32   265.24     0.12%  (99.72%)       0.74%  (99.02%)
+ 33   265.23     0.32%  (99.54%)       0.68%  (99.04%)
+ 34   256.59     0.14%  (99.67%)       0.80%  (98.87%)
+ 35   255.60     0.18%  (99.68%)       0.70%  (98.97%)
+ 36   247.41     0.16%  (99.66%)       0.66%  (99.05%)
+ 37   233.49     0.10%  (99.78%)       0.52%  (99.19%)
+ 38   237.61     0.14%  (99.77%)       0.50%  (99.16%)
+ 39   237.10     0.12%  (99.76%)       0.80%  (98.96%)
+ 40   228.19     0.08%  (99.77%)       0.64%  (99.08%)
+ 41   234.15     0.08%  (99.87%)       0.50%  (99.16%)
+ 42   228.65     0.08%  (99.84%)       0.60%  (99.12%)
+ 43   223.97     0.04%  (99.81%)       0.66%  (99.07%)
+ 44   216.50     0.16%  (99.70%)       0.50%  (99.15%)
+ 45   210.67     0.12%  (99.78%)       0.50%  (99.19%)
+ 46   217.97     0.10%  (99.79%)       0.60%  (99.12%)
+ 47   212.00     0.16%  (99.70%)       0.74%  (99.04%)
+ 48   212.07     0.08%  (99.79%)       0.58%  (99.17%)
+ 49   212.86     0.02%  (99.85%)       0.52%  (99.15%)
+ 50   208.86     0.06%  (99.87%)       0.84%  (98.99%)
+ 51   200.64     0.10%  (99.81%)       0.70%  (99.08%)
+ 52   204.83     0.00%  (99.89%)       0.66%  (99.10%)
+ 53   197.47     0.06%  (99.88%)       0.62%  (99.18%)
+ 54   194.76     0.06%  (99.82%)       0.66%  (99.13%)
+ 55   195.61     0.16%  (99.75%)       0.42%  (99.25%)
+ 56   191.83     0.08%  (99.79%)       0.50%  (99.20%)
+ 57   188.92     0.20%  (99.68%)       0.68%  (99.08%)
+ 58   191.12     0.12%  (99.76%)       0.64%  (99.08%)
+ 59   183.91     0.06%  (99.80%)       0.52%  (99.22%)
+ 60   188.17     0.04%  (99.82%)       0.64%  (99.21%)
+ 61   192.84     0.04%  (99.85%)       0.64%  (99.04%)
+ 62   185.13     0.02%  (99.86%)       0.58%  (99.18%)
+ 63   186.35     0.02%  (99.88%)       0.62%  (99.13%)
+ 64   182.39     0.02%  (99.92%)       0.56%  (99.16%)
+ 65   177.59     0.08%  (99.83%)       0.58%  (99.20%)
+ 66   172.96     0.14%  (99.75%)       0.60%  (99.13%)
+ 67   169.01     0.12%  (99.76%)       0.30%  (99.33%)
+ 68   173.53     0.10%  (99.80%)       0.48%  (99.25%)
+ 69   176.55     0.10%  (99.77%)       0.76%  (99.03%)
+ 70   172.33     0.08%  (99.80%)       0.46%  (99.23%)
+ 71   172.22     0.06%  (99.87%)       0.46%  (99.29%)
+ 72   170.23     0.04%  (99.86%)       0.58%  (99.08%)
+ 73   170.45     0.04%  (99.88%)       0.56%  (99.19%)
+ 74   164.66     0.04%  (99.87%)       0.32%  (99.32%)
+ 75   163.19     0.06%  (99.87%)       0.62%  (99.17%)
+ 76   162.81     0.06%  (99.80%)       0.52%  (99.24%)
+ 77   158.97     0.08%  (99.78%)       0.60%  (99.21%)
+ 78   156.48     0.16%  (99.77%)       0.42%  (99.34%)
+ 79   164.56     0.12%  (99.76%)       0.66%  (99.10%)
+ 80   155.52     0.08%  (99.82%)       0.58%  (99.17%)
+ 81   158.44     0.08%  (99.80%)       0.48%  (99.22%)
+ 82   152.41     0.00%  (99.89%)       0.56%  (99.32%)
+ 83   154.65     0.02%  (99.90%)       0.58%  (99.13%)
+ 84   152.74     0.04%  (99.87%)       0.64%  (99.19%)
+ 85   154.91     0.04%  (99.90%)       0.34%  (99.31%)
+ 86   156.72     0.06%  (99.88%)       0.54%  (99.26%)
+ 87   153.39     0.02%  (99.88%)       0.50%  (99.26%)
+ 88   149.82     0.10%  (99.76%)       0.52%  (99.21%)
+ 89   149.22     0.12%  (99.81%)       0.42%  (99.30%)
+ 90   149.33     0.10%  (99.79%)       0.72%  (99.11%)
+ 91   150.31     0.14%  (99.78%)       0.76%  (99.07%)
+ 92   149.23     0.10%  (99.81%)       0.54%  (99.24%)
+ 93   143.70     0.08%  (99.80%)       0.40%  (99.35%)
+ 94   152.19     0.06%  (99.89%)       0.72%  (99.08%)
+ 95   141.67     0.02%  (99.90%)       0.48%  (99.24%)
+ 96   144.73     0.00%  (99.90%)       0.46%  (99.25%)
+ 97   147.34     0.02%  (99.93%)       0.42%  (99.35%)
+ 98   139.02     0.04%  (99.91%)       0.66%  (99.18%)
+ 99   140.63     0.08%  (99.83%)       0.46%  (99.32%)
+100   142.94     0.12%  (99.81%)       0.48%  (99.24%)
+101     0.00     0.05%  (99.86%)       0.52%  (99.25%)
